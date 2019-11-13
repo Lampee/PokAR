@@ -10,3 +10,4 @@ h1 = pk.Hand([c1,c2,c3,c4,c5])
 
 h1.print_hand()
 print(h1.is_straight())
+print(h1.count_suits(pk.Suits.hearts))
