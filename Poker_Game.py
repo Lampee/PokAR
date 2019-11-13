@@ -43,7 +43,6 @@ class Hand:
                 return False
         return True
             
-
     def count_rank(self,rank):
         counter = 0
         for c in self.cards:
@@ -57,6 +56,59 @@ class Hand:
             if c.suit == suit:
                 counter+=1
         return counter
+
+    def is_flush(self):
+        for s in Suits:
+            if self.count_suits(s) == 5:
+                return True
+        return False
+
+    def is_straight_flush(self):
+       return self.is_straight() and self.is_flush()
+
+    def is_quads(self):
+        for r in Ranks:
+            if self.count_rank(r) == 4:
+                return True
+        return False
+
+    def is_trips(self):
+        for r in Ranks:
+            if self.count_rank(r) >= 3:
+                return True
+        return False
+
+
+    def is_two_pair(self):
+        pairs = 0
+        for r in Ranks:
+            if self.count_rank(r) == 2:
+                pairs += 1
+            if pairs >= 2:
+               return True
+        return False
+
+    def is_pair(self):
+        for r in Ranks:
+            if self.count_rank(r) == 2:
+                return True
+        return False
+
+    def get_highest(self):
+        card_values=[]
+        for c in self.cards:
+            card_values.append(c.rank.value)
+        card_values.sort()
+        return card_values[4]
+
+
+
+        
+            
+                
+
+          
+
 
    
 
