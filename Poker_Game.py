@@ -57,6 +57,12 @@ class Hand:
                 counter+=1
         return counter
 
+    def is_royal(self):
+        if self.cards[0].value == 10 and self.cards[1].rank.value == 11 and self.card[2].rank.value == 12 and self.cards[3].rank.value == 13 and self.card[4].rank.value == 14:
+            return True
+        else:
+            return False
+
     def is_flush(self):
         for s in Suits:
             if self.count_suits(s) == 5:
@@ -100,6 +106,8 @@ class Hand:
             card_values.append(c.rank.value)
         card_values.sort()
         return card_values[4]
+
+
 
 
 

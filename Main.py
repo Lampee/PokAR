@@ -1,7 +1,7 @@
 import numpy as np
 import cv2
 
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(1)
 
 
 def rescale_frame(frame,percent=75):
@@ -32,7 +32,7 @@ while True:
 
    
     cv2.imshow('frame', frame)
-    cv2.imshow('frame_thres', frame_thres)
+    cv2.imshow('frame_thres ', frame_thres)
     
 
     if cv2.waitKey(20) & 0xFF == ord('q'):
