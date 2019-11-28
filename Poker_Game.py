@@ -1,14 +1,10 @@
 from enum import Enum
-import poker_cards
-import os
+import Cards
+
 
 Ranks = Enum('Ranks', 'one two three four five six seven eight nine ten jack queen king ace none')
 Suits = Enum('Suits','hearts diamonds clubs spades none')
 Hands = Enum('Hands', 'high_card pair two_pair trips straight flush full_house quads straight_flush royal_flush none')
-
-path = os.path.dirname(os.path.abspath(__file__))
-query_ranks = poker_cards.load_ranks( path + '/Card_Query/ranks/')
-query_suits = poker_cards.load_suits( path + '/Card_Query/suits/')
 
 class poker_card:
     rank = Ranks.none

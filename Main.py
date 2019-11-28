@@ -1,8 +1,9 @@
 import cv2
 import numpy as np
 import Cards
-import time
+#import time
 import os
+
 
 ### ---- INITIALIZATION ---- ###
 # Define constants and initialize variables
@@ -11,6 +12,10 @@ import os
 IM_WIDTH = 1280
 IM_HEIGHT = 720 
 FRAME_RATE = 10
+
+path = os.path.dirname(os.path.abspath(__file__))
+query_ranks = Cards.load_ranks(path + '/Card_Query/ranks/')
+query_suits = Cards.load_suits(path + '/Card_Query/suits/')
 
 ## Initialize calculated frame rate because it's calculated AFTER the first time it's displayed
 frame_rate_calc = 1
@@ -32,6 +37,7 @@ def init_cam():
     while not testcam(cap):
         c -= 1
         cap = cv2.VideoCapture(c)
+        print(c)
     return c
 
 
@@ -97,10 +103,10 @@ def run():
                         cards[k].best_suit_match,
                         cards[k].rank_diff,
                         cards[k].suit_diff,
-                    ) = Cards.match_card(cards[k], train_ranks, train_suits)
+                    ) = Cards.match_card(cards[k], query_ranks, query_suits)
 
                     # Draw center point and match result on the image.
-                    frame = Cards.draw_results(image, cards[k])
+                    frame = Cards.draw_results(frame, cards[k])
                     k = k + 1
 
             # Draw card contours on image (have to do contours all at once or
@@ -109,7 +115,7 @@ def run():
                 temp_cnts = []
                 for i in range(len(cards)):
                     temp_cnts.append(cards[i].contour)
-                cv2.drawContours(image, temp_cnts, -1, (255, 0, 0), 2)
+                cv2.drawContours(frame, temp_cnts, -1, (255, 0, 0), 2)
 
         # Draw framerate in the corner of the image. Framerate is calculated at the end of the main loop,
         # so the first time this runs, framerate will be shown as 0.
@@ -142,4 +148,3 @@ def run():
 
 
 run()
-
